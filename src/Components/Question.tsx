@@ -12,6 +12,7 @@ type userAnswer={
   useranswer:string,
 }
 const Question: React.FC<props> = ({ api }) => {
+  const[gameOver,setGameOver]=useState(false)
     const [quesnum,setquesnum]=useState<number>(0)
     const[dataobj,setdataobj]=useState<ReturnApi>(api[quesnum])
     const [userAnswer,setuserAnswer]=useState<userAnswer>()
@@ -22,9 +23,6 @@ const Question: React.FC<props> = ({ api }) => {
       setscore(score+1)
     }
   },[quesnum])
-  
-  const find=api.indexOf(dataobj)
-  const datalenght=api.length-1<=find
   
   
    const TotalQuestion=api.length
@@ -40,13 +38,18 @@ const Question: React.FC<props> = ({ api }) => {
 
     }
     setuserAnswer(answerobj)
-    setquesnum(quesnum+1)
+    if (api.length>quesnum+1) {
+      
+      setquesnum(quesnum+1) 
+    } else {
+      setGameOver(true)
+    }
   
    
   
   }
   {
-    if(datalenght){
+    if(gameOver){
     return( <div className="question-card shadow p-5 text-center">
     {score==api.length-5?<h1 className="text-primary text-capitalze shadow">Better but not best </h1>:score>=api.length-3?<h1 className="text-success text-uppercase shadow">hyyy!!you won the game</h1>:<h1 className="text-danger text-capitalize shadow">Opps!!you lose the game</h1>}
     <h2>{score}</h2>
