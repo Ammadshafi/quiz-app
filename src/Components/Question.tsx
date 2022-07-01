@@ -19,7 +19,7 @@ const Question: React.FC<props> = ({ api }) => {
     const[ score,setscore]=useState<number>(0)
   useEffect(()=>{
     setdataobj(api[quesnum])
-    if(userAnswer?.answer==userAnswer?.useranswer){
+    if(userAnswer?.answer===userAnswer?.useranswer){
       setscore(score+1)
     }
   },[quesnum])

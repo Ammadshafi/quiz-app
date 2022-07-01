@@ -11,9 +11,14 @@ const Main = () => {
   const[amount,setamount]=useState<number>(10)
 
   const Apicall = async () => {
-    const datas: ReturnApi[] = await Api(amount);
-    setdata(datas);
-    setstart(true);
+    if (amount>0) {
+      const datas: ReturnApi[] = await Api(amount);
+      setdata(datas);
+      setstart(true);
+    } else {
+      alert("Amount must be greater than 0")
+    }
+  
   };
 
   if (!start) {
